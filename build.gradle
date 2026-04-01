@@ -13,13 +13,13 @@ repositories {
 dependencies {
     def jbAnnoVersion = '26.1.0'
 
-    compileOnly 'org.jetbrains:annotations:${jbAnnoVersion}'
-    testCompileOnly 'org.jetbrains:annotations:${jbAnnoVersion}'
+    compileOnly "org.jetbrains:annotations:${jbAnnoVersion}"
+    testCompileOnly "org.jetbrains:annotations:${jbAnnoVersion}"
 
     def asmVersion = '9.9.1'
 
-    implementation 'org.ow2.asm:asm:${asmVersion}'
-    testImplementation 'org.ow2.asm:asm:${asmVersion}'
+    implementation "org.ow2.asm:asm:${asmVersion}"
+    testImplementation "org.ow2.asm:asm:${asmVersion}"
 }
 
 shadowJar {
