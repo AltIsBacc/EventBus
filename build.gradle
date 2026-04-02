@@ -18,8 +18,12 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:${project.junitVersion}"
 }
 
+tasks.named('jar', Jar) {
+    enabled = false
+}
+
 shadowJar {
-    archiveFileName = "${project.name}-${project.version}.jar"
+    archiveClassifier = ''
     relocate 'org.objectweb.asm', 'io.github.revxrsal.libs.asm'
 }
 
@@ -28,22 +32,23 @@ java {
     withJavadocJar()
 
     sourceCompatibility = JavaVersion.VERSION_1_8
-	targetCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 8
+    it.options.release = 8
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            groupId = project.group
-            artifactId = project.name
-            version = project.version
-            from components.java
+        shadow(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
 
-            artifact shadowJar
+            from components.shadow
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
 }
