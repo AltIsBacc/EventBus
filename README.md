@@ -1,5 +1,4 @@
-
-# EventBus
+# EventBus [![Release](https://jitpack.io/v/AltIsBacc/EventBus.svg?style=flat-square)](https://jitpack.io/#AltIsBacc/EventBus) [![Release](https://jitpack.io/v/AltIsBacc/EventBus/week.svg?style=flat-square)](https://jitpack.io/#AltIsBacc/EventBus)
 A blazingly fast, small, multi-threadable and feature-rich event bus for Java
 
 ## Features
@@ -19,8 +18,10 @@ repositories {
 
 dependencies {
          implementation 'com.github.AltIsBacc:EventBus:1.5'
-} 
+}
 ```
+
+> Check the badge at the top of the README.md for the latest version
 
 ## Usage
 
