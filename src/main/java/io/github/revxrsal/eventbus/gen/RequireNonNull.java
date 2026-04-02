@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface RequireNonNull {
 
     /**
-     * The error message. <l>$field</l> will be replaced by the field name.
+     * The error message. {@code $field} will be replaced by the field name.
      *
      * @return The error message
      */

@@ -15,6 +15,15 @@ public final class Subscription {
     private final Class<?> eventType;
     private final EventPriority priority;
 
+    /**
+     * Constructs a new {@link Subscription}.
+     *
+     * @param listener  The event listener to invoke
+     * @param instance  The instance that owns this subscription, or null for standalone listeners
+     * @param name      The descriptive name of this subscription
+     * @param eventType The event type this subscription listens to
+     * @param priority  The priority of this subscription
+     */
     public Subscription(EventListener listener, Object instance, String name, Class<?> eventType, EventPriority priority) {
         this.listener = listener;
         this.instance = instance;

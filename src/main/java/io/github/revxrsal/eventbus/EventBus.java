@@ -102,6 +102,7 @@ public interface EventBus {
      *
      * <strong>Note that this will not respect futures if the event bus is asynchronous!</strong>
      *
+     * @param <T>   The event type
      * @param event Event to publish
      * @return The posted event
      * @see #publish(Object)
@@ -113,6 +114,7 @@ public interface EventBus {
      *
      * <strong>Note that this will not respect futures if the event bus is asynchronous!</strong>
      *
+     * @param <T>       The event type
      * @param eventType Event class to generate
      * @return The posted event
      * @see #publish(Class)
@@ -122,6 +124,7 @@ public interface EventBus {
     /**
      * Publishes the generated event to all listeners.
      *
+     * @param <T>        The event type
      * @param eventType      Event class to generate
      * @param parameters Event parameters in the appropriate order as
      *                   defined by {@link Index}
@@ -232,5 +235,4 @@ public interface EventBus {
      * @return The exception handler
      */
     EventExceptionHandler getEventExceptionHandler();
-
 }
