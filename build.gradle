@@ -4,25 +4,22 @@ plugins {
     id 'com.gradleup.shadow' version '9.4.1'
 }
 
-group 'io.github.revxrsal'
-version '1.6'
-
-repositories {
-    mavenCentral()
+java {
+    withSourcesJar()
+    withJavadocJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 dependencies {
-    def jbAnnoVersion = '26.1.0'
+    compileOnly "org.jetbrains:annotations:${project.jbAnnoVersion}"
+    testCompileOnly "org.jetbrains:annotations:${project.jbAnnoVersion}"
 
-    compileOnly "org.jetbrains:annotations:${jbAnnoVersion}"
-    testCompileOnly "org.jetbrains:annotations:${jbAnnoVersion}"
+    implementation "org.ow2.asm:asm:${project.asmVersion}"
+    testImplementation "org.ow2.asm:asm:${project.asmVersion}"
 
-    def asmVersion = '9.9.1'
-
-    implementation "org.ow2.asm:asm:${asmVersion}"
-    testImplementation "org.ow2.asm:asm:${asmVersion}"
-
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.1.0-M1'
+    testImplementation "org.junit.jupiter:junit-jupiter:${project.junitVersion}"
 }
 
 test {
@@ -30,26 +27,19 @@ test {
 }
 
 shadowJar {
-    archiveName "$baseName-$version.$extension"
+    archiveFileName = "${project.name}-${project.version}.jar"
     relocate 'org.objectweb.asm', 'io.github.revxrsal.libs.asm'
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version project.version
+            groupId = project.group
+            artifactId = project.name
+            version = project.version
             from components.java
 
             artifact shadowJar
-            artifact sourceJar {
-                classifier 'sources'
-            }
-            artifact javadocJar {
-                classifier 'javadoc'
-            }
         }
     }
 }
-
