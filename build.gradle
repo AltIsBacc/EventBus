@@ -20,8 +20,14 @@ dependencies {
 
     implementation "org.ow2.asm:asm:${asmVersion}"
     testImplementation "org.ow2.asm:asm:${asmVersion}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.1.0-M1'
 }
 
 shadowJar {
     relocate 'org.objectweb.asm', 'io.github.revxrsal.libs.asm'
+}
+
+test {
+    useJUnitPlatform()
 }

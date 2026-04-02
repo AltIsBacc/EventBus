@@ -9,6 +9,19 @@ A blazingly fast, small, multi-threadable and feature-rich event bus for Java
 - Provides easy classes for benchmarking and debugging
 - Ability to generate events from interfaces using ASM, which reduces the hassle of writing constructors, null checks, toString()/equals()/hashCode(), etc.
 
+## Installation
+
+```groovy
+repositories {
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+}
+
+dependencies {
+         implementation 'com.github.AltIsBacc:EventBus:1.5'
+} 
+```
+
 ## Usage
 
 ### Example event use
@@ -41,6 +54,33 @@ public void onCustomEvent(CustomEvent event) {
     System.out.println("Hello from onCustomEvent()");  
 }
 ```
+
+### Listener Priority
+
+You can control the order in which listeners run using `EventPriority` on `@SubscribeEvent`.
+
+Example:
+
+```java
+public class MyListener {
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onHigh(CustomEvent e) {
+        // runs before NORMAL and LOW listeners
+    }
+
+    @SubscribeEvent // defaults to EventPriority.NORMAL
+    public void onNormal(CustomEvent e) {
+    }
+
+    @SubscribeEvent(priority = EventPriority.MONITOR)
+    public void onMonitor(CustomEvent e) {
+        // runs after all other listeners; intended for logging/monitoring
+    }
+}
+```
+
+Listeners with higher priority are invoked before lower priorities. `MONITOR` listeners are always run last.
+
 
 ### Generated event (requires ASM)
 ```java
