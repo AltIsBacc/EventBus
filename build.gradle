@@ -4,12 +4,8 @@ plugins {
     id 'com.gradleup.shadow' version '9.4.1'
 }
 
-java {
-    withSourcesJar()
-    withJavadocJar()
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+test {
+    useJUnitPlatform()
 }
 
 dependencies {
@@ -22,13 +18,21 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:${project.junitVersion}"
 }
 
-test {
-    useJUnitPlatform()
-}
-
 shadowJar {
     archiveFileName = "${project.name}-${project.version}.jar"
     relocate 'org.objectweb.asm', 'io.github.revxrsal.libs.asm'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 8
 }
 
 publishing {
